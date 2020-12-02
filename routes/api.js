@@ -60,7 +60,7 @@ async function callAPI(method, path, params) {
     try {
         let result = await axios.request(config);
             console.log(result.data.responseData)
-            return result;
+            return result.data.responseData;
     } catch (err) {
         if (err.response) {
             console.error(err.response.status, err.response.statusText);
@@ -129,20 +129,37 @@ router.get('/retreive_nft/', async function(req,res,next){
 
 
 router.post('/transfer_nft/', async function(req,res,next){
-    let walletAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz";
-    let walletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';
+    let walletAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64"; //test user 1 
+    let walletSecret = 'rz18O3kIlaWhMBubnyWQm4HcHbZSvVA3DSaxPRC76mk=+CX+A/ryq07A13J/9FkwmOQI='; //test user 1 
     let contractId = '063aedae';
     let tokenIndex = "00000001";
     let tokenType = "10000001";
-    let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";
+    let toAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz"; //linewallet
     path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
     // the request body should be added after keys are sorted in the ascending order.
     let txid = await callAPI('POST', path, {
         "walletSecret": walletSecret,
         "toAddress": toAddress
     });
-   
+   console.log(txid)
     res.send({"txid":txid});
+});
+
+router.post('/transfer_nft2/', async function(req,res,next){
+    let walletAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz";//linewallet
+    let walletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';//linewallet
+    let contractId = '063aedae';
+    let tokenIndex = "00000001";
+    let tokenType = "10000001";
+    let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";//test user 1 
+    path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
+    // the request body should be added after keys are sorted in the ascending order.
+    let txid = await callAPI('POST', path, {
+        "walletSecret": walletSecret,
+        "toAddress": toAddress
+    });
+   console.log(txid)
+// /    res.send({"txid":txid}); //test용으로 다시 돌려받기
 });
 
 router.get('/mint_nft/', async function(req,res,next){
