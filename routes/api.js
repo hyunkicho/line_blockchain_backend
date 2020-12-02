@@ -127,19 +127,31 @@ router.get('/retreive_nft/', async function(req,res,next){
 });
 
 
-router.post('/parth4/', async function(req,res){
+
+router.post('/transfer_nft/', async function(req,res,next){
     // let rb = req.body;
+    // let walletAddress = rb.walletAddress;
+    // let ownerWalletAddress = rb.ownerWalletAddress;
     // let contractId = rb.contractId;
     // let tokenType = rb.tokenType;
-    // let tokenIndex = rb.tokenIndex;
+    // let tokenIdNname = rb.tokenIdNname;
+    // let info = rb.info;
+    // let toAddress = rb.toAddress;
 
-    
+    let walletAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz";
+    let walletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';
     let contractId = '063aedae';
+    let tokenIndex = 00000001;
     let tokenType = 10000001;
-    let tokenIndex = '00000001';
-    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
+    let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";
+    path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
     // the request body should be added after keys are sorted in the ascending order.
-    await callAPI('GET', path);
+    await callAPI('POST', path, {
+        "walletSecret": walletSecret,
+        "toAddress": toAddress
+    });
+    // res.send() //추가!!
+    // 라인 로그인 API 붙일 때 to user id 사용
 });
 
 router.get('/mint_nft/', async function(req,res,next){
