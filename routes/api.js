@@ -59,8 +59,8 @@ async function callAPI(method, path, params) {
 
     try {
         let result = await axios.request(config);
-            // console.log(result);
             console.log(result.data.responseData)
+            return result;
     } catch (err) {
         if (err.response) {
             console.error(err.response.status, err.response.statusText);
