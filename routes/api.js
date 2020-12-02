@@ -158,8 +158,8 @@ router.post('/transfer_nft2/', async function(req,res,next){
         "walletSecret": walletSecret,
         "toAddress": toAddress
     });
-   console.log(txid)
-// /    res.send({"txid":txid}); //test용으로 다시 돌려받기
+    console.log(txid)
+    res.send({"txid":txid}); //test용으로 다시 돌려받기
 });
 
 router.get('/mint_nft/', async function(req,res,next){
