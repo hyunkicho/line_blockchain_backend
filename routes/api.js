@@ -59,7 +59,7 @@ async function callAPI(method, path, params) {
 
     try {
         let result = await axios.request(config);
-            console.log(result.data.responseData)
+            console.log("성공",result.data.responseData)
             return result.data.responseData;
     } catch (err) {
         if (err.response) {
@@ -129,10 +129,10 @@ router.get('/retreive_nft/', async function(req,res,next){
 
 
 router.post('/transfer_nft/', async function(req,res,next){
-    let walletAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64"; //test user 1 
-    let walletSecret = 'rz18O3kIlaWhMBubnyWQm4HcHbZSvVA3DSaxPRC76mk=+CX+A/ryq07A13J/9FkwmOQI='; //test user 1 
+    let walletAddress = "tlink14d9ycnwqa975d4fmpfw35u6cnp89redkfm7rpp"; //tokenholder01 
+    let walletSecret = 'WbQxvP81vdbTanATMH6cpc/ZHGN/FCkHY60AHFUBpRo='; //tokenholder01
     let contractId = '063aedae';
-    let tokenIndex = "00000001";
+    let tokenIndex = "00000018";
     let tokenType = "10000001";
     let toAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz"; //linewallet
     path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
@@ -149,7 +149,7 @@ router.post('/transfer_nft2/', async function(req,res,next){
     let walletAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz";//linewallet
     let walletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';//linewallet
     let contractId = '063aedae';
-    let tokenIndex = "00000001";
+    let tokenIndex = "00000018";
     let tokenType = "10000001";
     let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";//test user 1 
     path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
@@ -191,6 +191,35 @@ router.get('/mint_nft/', async function(req,res,next){
 });
 
 (async()=>{
+
+    //     let walletAddress = "tlink14d9ycnwqa975d4fmpfw35u6cnp89redkfm7rpp"; //tokenholder01 
+    //     let walletSecret = 'WbQxvP81vdbTanATMH6cpc/ZHGN/FCkHY60AHFUBpRo='; //tokenholder01
+    //     let contractId = '063aedae';
+    //     let tokenIndex = "00000018";
+    //     let tokenType = "10000001";
+    //     let toAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz"; //linewallet
+    //     path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
+    //     // the request body should be added after keys are sorted in the ascending order.
+    //     let txid = await callAPI('POST', path, {
+    //         "walletSecret": walletSecret,
+    //         "toAddress": toAddress
+    //     });
+    //    console.log(txid)
+
+
+    //    let walletAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz";//linewallet
+    //    let walletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';//linewallet
+    //    let contractId = '063aedae';
+    //    let tokenIndex = "00000018";
+    //    let tokenType = "10000001";
+    //    let toAddress = "tlink14d9ycnwqa975d4fmpfw35u6cnp89redkfm7rpp";//tokenholder01  
+    //    path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
+    //    // the request body should be added after keys are sorted in the ascending order.
+    //    let txid = await callAPI('POST', path, {
+    //        "walletSecret": walletSecret,
+    //        "toAddress": toAddress
+    //    });
+    //    console.log(txid)
 
     //1-1
 
@@ -240,7 +269,8 @@ router.get('/mint_nft/', async function(req,res,next){
     // const ownerWalletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';
     // const contractId = '063aedae';
     // const tokenType = 10000001;
-    // const toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";
+    // const toAddress = "tlink14d9ycnwqa975d4fmpfw35u6cnp89redkfm7rpp";
+    // const tokenIdNname = "Nike02Y3ORISAN";
     // const qualityVerifier = '조현기';
     // path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
     // // the request body should be added after keys are sorted in the ascending order.
