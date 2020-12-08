@@ -28,3 +28,8 @@ NFT - 보증서 관리 부분입니다.
 
 # 프론트 엔드 깃허브 주소
     https://github.com/hyunkicho/line_blockchain_front
+    
+# 핵심 로직
+![image](https://user-images.githubusercontent.com/35443121/101473378-1b87f900-398d-11eb-99f9-344e28908a35.png)
+![image](https://user-images.githubusercontent.com/35443121/101473412-25116100-398d-11eb-8b8b-75c74d0e5a46.png)
+![image](https://user-images.githubusercontent.com/35443121/101473444-2e9ac900-398d-11eb-98f6-544e74bccbb2.png)
