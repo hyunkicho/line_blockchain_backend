@@ -15,11 +15,15 @@ CommonConfig.Database = {
 };
 
 CommonConfig.Blockchain={
-    apikey: process.env.apikey,
-    secret: process.env.secret,
-    ownerWalletSecret: process.env.ownerWalletSecret,
-    ownerWalletAddress: process.env.ownerWalletAddress,
+    apikey_product: process.env.apikey_product,
+    secret_product: process.env.secret_product,
+    ownerWalletSecret_product: process.env.ownerWalletSecret_product,
+    ownerWalletAddress_product: process.env.ownerWalletAddress_product,
     contractId_product: process.env.contractId_product,
+    apikey_validator: process.env.apikey_validator,
+    secret_validator: process.env.secret_validator,
+    ownerWalletSecret_validator: process.env.ownerWalletSecret_validator,
+    ownerWalletAddress_validator: process.env.ownerWalletAddress_validator,
     contractId_validator: process.env.contractId_validator
 }
 
