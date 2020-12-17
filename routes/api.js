@@ -122,8 +122,20 @@ router.get('/retreive_product_nft/', async function(req,res,next){
     let tokenType = 10000001;
     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
     // the request body should be added after keys are sorted in the ascending order.
-    await callAPI('GET', path);
+    let raw_data = await callAPI('GET', path);
+    let data = raw_data.token[0];
+    res.send({"data": data});
 });
+//즉시실행 테스트
+// (async function () { 
+//     let contractId = '063aedae';
+//     let tokenType = 10000001;
+//     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
+//     // the request body should be added after keys are sorted in the ascending order.
+//     let result = await callAPI('GET', path);
+//     console.log("result",result.token[0])
+//  })()
+
 
 router.get('/retreive_prodcut_nft_one/', async function(req,res,next){
     // let rb = req.body;
@@ -209,6 +221,7 @@ router.get('/mint_nft/', async function(req,res,next){ //판매자가 최초로 
    res.send({"data":data});
 });
 
+
 router.get('/mint_nft2/', async function(req,res,next){ //검수자 활동내역 인증할 때
     // let rb = req.body;
     // let tokenType = rb.tokenType;
@@ -233,5 +246,8 @@ router.get('/mint_nft2/', async function(req,res,next){ //검수자 활동내역
    });
    res.send({"data":data});
 });
+
+
+
 
 module.exports = router;
