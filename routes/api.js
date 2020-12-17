@@ -138,7 +138,7 @@ router.get('/retreive_prodcut_nft_one/', async function(req,res,next){
     await callAPI('GET', path);
 });
 
-outer.get('/retreive_validator_nft_one/', async function(req,res,next){
+router.get('/retreive_validator_nft_one/', async function(req,res,next){
     // let rb = req.body;
     // let contractId = rb.contractId;
     // let tokenType = rb.tokenType;
