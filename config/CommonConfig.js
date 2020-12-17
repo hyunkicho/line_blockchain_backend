@@ -8,7 +8,7 @@ CommonConfig.Database = {
     user: process.env.DBUSER,
     password: process.env.DBPASS,
     database: process.env.DBNAME,
-    waitForConnection: false,
+    // waitForConnection: false,
     connectionLimit: 100,
     multipleStatements:true,
     timezone: '+00:00'
