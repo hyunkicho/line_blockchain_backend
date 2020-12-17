@@ -125,6 +125,19 @@ router.get('/retreive_nft/', async function(req,res,next){
     await callAPI('GET', path);
 });
 
+router.get('/retreive_nft_one/', async function(req,res,next){
+    // let rb = req.body;
+    // let contractId = rb.contractId;
+    // let tokenType = rb.tokenType;
+
+    let contractId = '063aedae';
+    let tokenType = 10000001;
+    let tokenIndex = req.body.tokenIndex;
+    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
+    // the request body should be added after keys are sorted in the ascending order.
+    await callAPI('GET', path);
+});
+
 
 
 router.post('/transfer_nft/', async function(req,res,next){
@@ -169,6 +182,7 @@ router.get('/mint_nft/', async function(req,res,next){ //판매자가 최초로 
    let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";
    let qualityVerifier = '검수자:조현기';
    let contractId = contractId_product;
+   let tokenIdNname = 'Nike-dsfe1';
    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
    // the request body should be added after keys are sorted in the ascending order.
    await callAPI('POST', path, {
@@ -189,8 +203,9 @@ router.get('/mint_nft2/', async function(req,res,next){ //검수자 활동내역
 
    let tokenType = 10000001;
    let toAddress = "tlink19wrsts9ypttu00z8ujm3rq409chzhq5rktx98c";
-   let validator = '조현기';
+   let validator_mail = 'avd@blimit.com';
    let contractId = contractId_validator;
+   let tokenIdNname = '조현기';
 
    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
    // the request body should be added after keys are sorted in the ascending order.
@@ -200,7 +215,7 @@ router.get('/mint_nft2/', async function(req,res,next){ //검수자 활동내역
        "name": tokenIdNname,
        "toAddress": toAddress,
        // "toUserId" : toUserId, //라인 로그인 연동시 사용 가능
-       "meta" : validator
+       "meta" : validator_mail
    });
 });
 
