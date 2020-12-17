@@ -167,7 +167,7 @@ router.get('/mint_nft/', async function(req,res,next){ //판매자가 최초로 
 
    let tokenType = 10000001;
    let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";
-   let qualityVerifier = '조현기';
+   let qualityVerifier = '검수자:조현기';
    let contractId = contractId_product;
    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
    // the request body should be added after keys are sorted in the ascending order.
