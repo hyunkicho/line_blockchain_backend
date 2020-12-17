@@ -114,12 +114,18 @@ router.post('/create_nft/', async function(req,res,next){
 });
 
 router.get('/retreive_product_nft/', async function(req,res,next){
-    // let rb = req.body;
-    // let contractId = rb.contractId;
-    // let tokenType = rb.tokenType;
+    let contractId = contractId_product;
+    let tokenType = 10000001; //추후 대분류 (제품별 분류)에 사용
+    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
+    // the request body should be added after keys are sorted in the ascending order.
+    let raw_data = await callAPI('GET', path);
+    let data = raw_data.token[0];
+    res.send({"data": data});
+});
 
-    let contractId = '063aedae';
-    let tokenType = 10000001;
+router.get('/retreive_validator_nft/', async function(req,res,next){
+    let contractId = contractId_validator;
+    let tokenType = 10000001;//추후 대분류 (검증자 그룹별 분류)에 사용
     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
     // the request body should be added after keys are sorted in the ascending order.
     let raw_data = await callAPI('GET', path);
@@ -136,32 +142,33 @@ router.get('/retreive_product_nft/', async function(req,res,next){
 //     console.log("result",result.token[0])
 //  })()
 
+//----------------- 특정 토큰 상세 검색 ----------------------------------
+// router.get('/retreive_prodcut_nft_one/', async function(req,res,next){
+//     // let rb = req.body;
+//     // let contractId = rb.contractId;
+//     // let tokenType = rb.tokenType;
 
-router.get('/retreive_prodcut_nft_one/', async function(req,res,next){
-    // let rb = req.body;
-    // let contractId = rb.contractId;
-    // let tokenType = rb.tokenType;
+//     let contractId = contractId_product;
+//     let tokenType = 10000001;
+//     let tokenIndex = req.body.tokenIndex;
+//     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
+//     // the request body should be added after keys are sorted in the ascending order.
+//     await callAPI('GET', path);
+// });
 
-    let contractId = contractId_product;
-    let tokenType = 10000001;
-    let tokenIndex = req.body.tokenIndex;
-    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
-    // the request body should be added after keys are sorted in the ascending order.
-    await callAPI('GET', path);
-});
+// router.get('/retreive_validator_nft_one/', async function(req,res,next){
+//     // let rb = req.body;
+//     // let contractId = rb.contractId;
+//     // let tokenType = rb.tokenType;
 
-router.get('/retreive_validator_nft_one/', async function(req,res,next){
-    // let rb = req.body;
-    // let contractId = rb.contractId;
-    // let tokenType = rb.tokenType;
-
-    let contractId = contractId_validator;
-    let tokenType = 10000001;
-    let tokenIndex = req.body.tokenIndex;
-    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
-    // the request body should be added after keys are sorted in the ascending order.
-    await callAPI('GET', path);
-});
+//     let contractId = contractId_validator;
+//     let tokenType = 10000001;
+//     let tokenIndex = req.body.tokenIndex;
+//     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
+//     // the request body should be added after keys are sorted in the ascending order.
+//     await callAPI('GET', path);
+// });
+//-----------------------------------------------------------------------
 
 
 
@@ -171,7 +178,7 @@ router.post('/transfer_nft/', async function(req,res,next){
     let tokenIndex = "00000018";
     let tokenType = "10000001";
     let toAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz"; //linewallet
-    path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
+    path = `/v1/wallets/${walletAddress}/item-tokens/${contractId_product}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
     // the request body should be added after keys are sorted in the ascending order.
     let txid = await callAPI('POST', path, {
         "walletSecret": walletSecret,
@@ -187,7 +194,7 @@ router.post('/transfer_nft2/', async function(req,res,next){
     let tokenIndex = "00000018";
     let tokenType = "10000001";
     let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";//test user 1 
-    path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
+    path = `/v1/wallets/${walletAddress}/item-tokens/${contractId_product}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
     // the request body should be added after keys are sorted in the ascending order.
     let txid = await callAPI('POST', path, {
         "walletSecret": walletSecret,
@@ -223,14 +230,9 @@ router.get('/mint_nft/', async function(req,res,next){ //판매자가 최초로 
 
 
 router.get('/mint_nft2/', async function(req,res,next){ //검수자 활동내역 인증할 때
-    // let rb = req.body;
-    // let tokenType = rb.tokenType;
-    // let toAddress = rb.toAddress;
-    // let qualityVerifier = rb.qualityVerifier;
-
    let tokenType = 10000001;
    let toAddress = "tlink19wrsts9ypttu00z8ujm3rq409chzhq5rktx98c";
-   let validator_mail = 'avd@blimit.com';
+   let validator_detail = '검수영역 : Nike, Adidas, supreme';
    let contractId = contractId_validator;
    let tokenIdNname = '조현기';
 
@@ -242,7 +244,7 @@ router.get('/mint_nft2/', async function(req,res,next){ //검수자 활동내역
        "name": tokenIdNname,
        "toAddress": toAddress,
        // "toUserId" : toUserId, //라인 로그인 연동시 사용 가능
-       "meta" : validator_mail
+       "meta" : validator_detail
    });
    res.send({"data":data});
 });
