@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "cross-env NODE_ENV=inserver nodemon ./bin/www"
+    "inserver": "cross-env NODE_ENV=inserver nodemon ./bin/www"
   },
   "dependencies": {
     "axios": "^0.21.0",
