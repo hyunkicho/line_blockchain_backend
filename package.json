@@ -3,21 +3,27 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "cross-env NODE_ENV=inserver nodemon ./bin/www"
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "bignumber": "^1.1.0",
+    "bignumber.js": "^9.0.1",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "crossenv": "0.0.2-security",
     "crypto": "^1.0.1",
+    "custom-env": "^2.0.1",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^2.2.5",
+    "nodemon": "^2.0.6",
     "passport-local": "^1.0.0",
     "request": "^2.88.2"
   }

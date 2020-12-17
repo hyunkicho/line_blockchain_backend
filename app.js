@@ -4,6 +4,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+//Module container 
+global.dicontainer = require( './module/diContainer' )();
+dicontainer.register( "BigNumber", require( 'bignumber.js' ) );
+dicontainer.register( "pathUtil", require( 'path' ) );
+dicontainer.register( "crypto", require( 'crypto' ) );
+dicontainer.factory( "CommonConfig", require( "./config/CommonConfig" ) );
+dicontainer.factory( "Err", require( './module/error-handle' ) );
+dicontainer.factory( "JSONResponse", require( "./module/JSON-Response" ) );
+dicontainer.factory( "DB", require( './module/sql' ) );
+
+// Router Load
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
@@ -11,6 +23,7 @@ const cors = require('cors');
 
 
 var app = express();
+
 app.use(
   cors({
     origin:true,

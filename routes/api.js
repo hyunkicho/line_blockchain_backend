@@ -4,11 +4,11 @@ const crypto = require('crypto');
 const axios = require('axios').default;
 
 const CommonConfig = dicontainer.get( "CommonConfig" );
-const apikey = CommonConfig.blockchain.apikey;
-const secret = CommonConfig.blockchain.secret;
-const ownerWalletAddress = CommonConfig.blockchain.ownerWalletAddress;
-const ownerWalletSecret = CommonConfig.blockchain.ownerWalletSecret;
-const contractId = CommonConfig.blockchain.contractId;
+const apikey = CommonConfig.Blockchain.apikey;
+const secret = CommonConfig.Blockchain.secret;
+const ownerWalletAddress = CommonConfig.Blockchain.ownerWalletAddress;
+const ownerWalletSecret = CommonConfig.Blockchain.ownerWalletSecret;
+const contractId = CommonConfig.Blockchain.contractId;
 
 function jsonToQueryString(json, path) {
     if (json && Object.keys(json).length > 0) {

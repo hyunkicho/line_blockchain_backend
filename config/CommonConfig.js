@@ -1,4 +1,4 @@
-require('custom-env').env( true );
+require( 'custom-env' ).env( true );
 
 CommonConfig = {};
 
@@ -21,4 +21,4 @@ CommonConfig.Blockchain={
     contractId: process.env.contractId
 }
 
-moduel.exports = CommonConfig;
+module.exports = CommonConfig;
