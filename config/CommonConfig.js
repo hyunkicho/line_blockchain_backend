@@ -7,10 +7,11 @@ CommonConfig.Database = {
     port: process.env.DBPORT,
     user: process.env.DBUSER,
     password: process.env.DBPASS,
+    database: process.env.DBNAME,
     waitForConnection: false,
     connectionLimit: 100,
     multipleStatements:true,
-    timezone: '00:00'
+    timezone: '+00:00'
 };
 
 CommonConfig.Blockchain={
