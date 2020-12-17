@@ -3,10 +3,12 @@ var router = express.Router();
 const crypto = require('crypto');
 const axios = require('axios').default;
 
-const apikey = 'c27cd6d2-a256-4105-ba0f-65a9f754170a'
-const secret = 'b6d6bbfc-d411-47c1-9eb4-28c513bf2a67';
-
-// axios.defaults.baseURL = endpoint;
+const CommonConfig = dicontainer.get( "CommonConfig" );
+const apikey = CommonConfig.blockchain.apikey;
+const secret = CommonConfig.blockchain.secret;
+const ownerWalletAddress = CommonConfig.blockchain.ownerWalletAddress;
+const ownerWalletSecret = CommonConfig.blockchain.ownerWalletSecret;
+const contractId = CommonConfig.blockchain.contractId;
 
 function jsonToQueryString(json, path) {
     if (json && Object.keys(json).length > 0) {
@@ -86,17 +88,12 @@ router.get('/list_all_nft/', async function(req,res,next){
 router.post('/create_nft/', async function(req,res,next){
     // let rb = req.body;
     // let walletAddress = rb.walletAddress;
-    // let ownerWalletAddress = rb.ownerWalletAddress;
     // let contractId = rb.contractId;
     // let tokenType = rb.tokenType;
     // let tokenIdNname = rb.tokenIdNname;
     // let info = rb.info;
     // let toAddress = rb.toAddress;
 
-    let walletAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz";
-    let ownerWalletAddress = walletAddress;
-    let ownerWalletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';
-    let contractId = '063aedae';
     let tokenType = 10000001;
     let tokenIdNname = 'Guarantee';
     let info = '해당 제품은 000년 00월 00일에 발매된 제품으로 ~특징을 가지고 있습니다.';
@@ -131,7 +128,6 @@ router.get('/retreive_nft/', async function(req,res,next){
 router.post('/transfer_nft/', async function(req,res,next){
     let walletAddress = "tlink14d9ycnwqa975d4fmpfw35u6cnp89redkfm7rpp"; //tokenholder01 
     let walletSecret = 'WbQxvP81vdbTanATMH6cpc/ZHGN/FCkHY60AHFUBpRo='; //tokenholder01
-    let contractId = '063aedae';
     let tokenIndex = "00000018";
     let tokenType = "10000001";
     let toAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz"; //linewallet
@@ -148,7 +144,6 @@ router.post('/transfer_nft/', async function(req,res,next){
 router.post('/transfer_nft2/', async function(req,res,next){
     let walletAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz";//linewallet
     let walletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';//linewallet
-    let contractId = '063aedae';
     let tokenIndex = "00000018";
     let tokenType = "10000001";
     let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";//test user 1 
@@ -164,17 +159,10 @@ router.post('/transfer_nft2/', async function(req,res,next){
 
 router.get('/mint_nft/', async function(req,res,next){
     // let rb = req.body;
-    // let walletAddress = rb.walletAddress;
-    // let ownerWalletSecret = rb.ownerWalletSecret;
-    // let contractId = rb.contractId;
     // let tokenType = rb.tokenType;
     // let toAddress = rb.toAddress;
     // let qualityVerifier = rb.qualityVerifier;
 
-   let walletAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz";
-   const ownerWalletAddress = walletAddress;
-   const ownerWalletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';
-   const contractId = '063aedae';
    const tokenType = 10000001;
    const toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";
    const qualityVerifier = '조현기';
