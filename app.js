@@ -18,9 +18,9 @@ dicontainer.factory( "DB", require( './module/sql' ) );
 // Router Load
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var validatorRouter = require('./routes/validator');
-var productRouter = require('./routes/product');
-var validator_tokenRouter = require('./routes/validator_token');
+var validator_nftRouter = require('./routes/validator_nft');
+var product_nftRouter = require('./routes/product_nft');
+var validator_ftRouter = require('./routes/validator_ft');
 
 const cors = require('cors');
 
@@ -48,9 +48,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/validator', validatorRouter);
-app.use('/product', productRouter);
-app.use('/validator_token', validator_tokenRouter);
+app.use('/validator_nft', validator_nftRouter);
+app.use('/product_nft', product_nftRouter);
+app.use('/validator_ft', validator_ftRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

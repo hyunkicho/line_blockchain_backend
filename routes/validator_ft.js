@@ -85,10 +85,10 @@ async function callAPI(method, path, params) {
 
 /////////////////////////REST API -POST//////////////////////
 
-router.post('/mint_validator_service_token/', async function(req,res,next){ //검증인 ID 최초 생성
+router.post('/mint/', async function(req,res,next){ //검증인 ID 최초 생성
     
     let toAddress = ownerWalletAddress;
-    let amount = "1000";
+    let amount = "1000000"; //decimal 6 = 1token
     path = `/v1/service-tokens/${contractId}/mint`;
     // the request body should be added after keys are sorted in the ascending order.
     let data = await callAPI('POST', path, {
@@ -97,21 +97,28 @@ router.post('/mint_validator_service_token/', async function(req,res,next){ //�
         "ownerAddress": ownerWalletAddress,
         "ownerSecret": ownerWalletSecret
     });
+    res.send({data});
  });
 
-router.post('/burn_validator_service_token/', async function(req,res,next){
-    // let walletAddress = ; 받는 사람 주소 넣기.
-    path  = `/v1/service-tokens/${contractId}/burn`
-    let data = await callAPI('POST', path, {
-        "amount": amount,
-        "ownerAddress": ownerWalletAddress,
-        "ownerSecret": ownerWalletSecret
-    });
+//  (async function () { 
+//     let walletAddress = ownerWalletAddress; 
+//     path  = `/v1/wallets/${walletAddress}/service-tokens/${contractId}`
+//     let raw_data = await callAPI('GET', path);
+//     console.log(
+//         {"balance" : (raw_data.amount)/(10**raw_data.decimals),
+//          "symbol" : raw_data.symbol
+//         }
+//     );
+//     // res.send({"data": data});
+//  })()
+
+
+router.get('/retrieve/', async function(req,res,next){
+    let walletAddress = ownerWalletAddress; 
+    path  = `/v1/wallets/${walletAddress}/service-tokens/${contractId}`
+    let raw_data = await callAPI('GET', path);
+    res.send({"balance" : (raw_data.amount)/(10**raw_data.decimals),"symbol" : raw_data.symbol});
 } )
 
-//즉시실행 테스트
-// (async function () { 
-    
-// })()
 
 module.exports = router;

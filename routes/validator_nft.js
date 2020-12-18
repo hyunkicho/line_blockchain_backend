@@ -82,7 +82,7 @@ async function callAPI(method, path, params) {
 /////////////////////////REST API -get//////////////////////
 
 
-router.get('/retreive_validator_nft/', async function(req,res,next){
+router.get('/retreive/', async function(req,res,next){
     let tokenType = 10000001;//추후 대분류 (검증자 그룹별 분류)에 사용
     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
     // the request body should be added after keys are sorted in the ascending order.
@@ -101,7 +101,7 @@ router.get('/retreive_validator_nft/', async function(req,res,next){
 
 /////////////////////////REST API -POST//////////////////////
 
-router.post('/mint_nft/', async function(req,res,next){ //검증인 ID 최초 생성
+router.post('/mint/', async function(req,res,next){ //검증인 ID 최초 생성
 
    let tokenType = 10000001;
    let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";
