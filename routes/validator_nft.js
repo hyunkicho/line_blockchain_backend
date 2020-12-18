@@ -137,29 +137,9 @@ router.post('/mint/', async function(req,res,next){ //검증인 ID 최초 생성
 //     // res.send() //추가!!
 //     // 라인 로그인 API 붙일 때 to user id 사용
 // });
-
-(async function () { 
-    // let tokenType = 10000001;
-    // let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";
-    // let validator_info = 'leeSG@blimit.com';
-    // let tokenIdNname = 'LeeSG';
-    // path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
-    // // the request body should be added after keys are sorted in the ascending order.
-    // let data = await callAPI('POST', path, {
-    //     "ownerAddress": ownerWalletAddress,
-    //     "ownerSecret": ownerWalletSecret,
-    //     "name": tokenIdNname,
-    //     "toAddress": toAddress,
-    //     "meta" : validator_info
-    // });
-    let tokenType = 10000001;//추후 대분류 (검증자 그룹별 분류)에 사용
-    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
-    // the request body should be added after keys are sorted in the ascending order.
-    let raw_data = await callAPI('GET', path);
-    let data = raw_data.token[0];
-    console.log(data)
- })()
-
-
+router.get('/address_explorer', async function(req,res,next){
+    let walletAddress = ownerWalletAddress; 
+    res.send(`https://explorer.blockchain.line.me/cashew/address/${walletAddress}`)
+})
 
 module.exports = router;

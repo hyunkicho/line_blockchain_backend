@@ -112,10 +112,6 @@ router.get('/retrieve/', async function(req,res,next){
     res.send({"balance" : (raw_data.amount)/(10**raw_data.decimals),"symbol" : raw_data.symbol});
 } )
 
-router.get('/address_explorer', async function(req,res,next){
-    res.send(`https://explorer.blockchain.line.me/cashew/address/${ownerWalletAddress}`)
-})
 
-console.log(`https://explorer.blockchain.line.me/cashew/address/${ownerWalletAddress}`)
 
 module.exports = router;
