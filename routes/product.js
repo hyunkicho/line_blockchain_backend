@@ -83,7 +83,6 @@ async function callAPI(method, path, params) {
 
 
 router.get('/retreive_product_nft/', async function(req,res,next){
-    let contractId = contractId;
     let tokenType = 10000001; //추후 대분류 (제품별 분류)에 사용
     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
     // the request body should be added after keys are sorted in the ascending order.
