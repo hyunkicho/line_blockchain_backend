@@ -100,17 +100,9 @@ router.post('/mint/', async function(req,res,next){ //검증인 ID 최초 생성
     res.send({data});
  });
 
-//  (async function () { 
-//     let walletAddress = ownerWalletAddress; 
-//     path  = `/v1/wallets/${walletAddress}/service-tokens/${contractId}`
-//     let raw_data = await callAPI('GET', path);
-//     console.log(
-//         {"balance" : (raw_data.amount)/(10**raw_data.decimals),
-//          "symbol" : raw_data.symbol
-//         }
-//     );
-//     // res.send({"data": data});
-//  })()
+ (async function () { 
+
+ })()
 
 
 router.get('/retrieve/', async function(req,res,next){
@@ -120,5 +112,10 @@ router.get('/retrieve/', async function(req,res,next){
     res.send({"balance" : (raw_data.amount)/(10**raw_data.decimals),"symbol" : raw_data.symbol});
 } )
 
+router.get('/address_explorer', async function(req,res,next){
+    res.send(`https://explorer.blockchain.line.me/cashew/address/${ownerWalletAddress}`)
+})
+
+console.log(`https://explorer.blockchain.line.me/cashew/address/${ownerWalletAddress}`)
 
 module.exports = router;
