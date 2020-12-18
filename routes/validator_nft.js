@@ -83,7 +83,7 @@ async function callAPI(method, path, params) {
 
 
 router.get('/retreive/', async function(req,res,next){
-    let tokenType = 10000001;//추후 대분류 (검증자 그룹별 분류)에 사용
+    let tokenType = 10000001;//레벨에따른 type변화
     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
     // the request body should be added after keys are sorted in the ascending order.
     let raw_data = await callAPI('GET', path);
@@ -91,15 +91,53 @@ router.get('/retreive/', async function(req,res,next){
     res.send({"data": data});
 });
 
+router.get('/retreive_prize/', async function(req,res,next){
+    let tokenType = '10000001';
+    let tokenIndex = '00000001';
+    path = `v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/children`;
+    // the request body should be added after keys are sorted in the ascending order.
+    let raw_data = await callAPI('GET', path);
+    res.send({"prizename":raw_data[0].name, "prizeindex":raw_data[0].tokenId, "createdAt":raw_data[0].createdAt, "meta":raw_data[0].meta});
+});
 
-//  router.get('/list_all_nft/', async function(req,res,next){ //검증자 전체리스트 조회 시
-//     let path= `/v1/item-tokens/${contractId}/non-fungibles`
-//     await callAPI('GET',path);
-//     // res.render() 추가해야 합니다!
-// });
+router.get('/retreive_all_level1/', async function(req,res,next){
+    let tokenType = '10000001';
+    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
+    // the request body should be added after keys are sorted in the ascending order.
+    let raw_data = await callAPI('GET', path);
+    res.send({"prizename":raw_data[0].name, "prizeindex":raw_data[0].tokenId, "createdAt":raw_data[0].createdAt, "meta":raw_data[0].meta});
+});
 
+router.get('/retreive_all_level1/', async function(req,res,next){
+    let tokenType = '10000001';
+    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
+    // the request body should be added after keys are sorted in the ascending order.
+    let raw_data = await callAPI('GET', path);
+    res.send({"id1" : raw_data.token[0],"id2" : raw_data.token[1], "id3" : raw_data.token[2], "id4" : raw_data.token[3], "id5" : raw_data.token[4]});
+});
+
+router.get('/address_explorer', async function(req,res,next){
+    let walletAddress = ownerWalletAddress; 
+    res.send({"data":`https://explorer.blockchain.line.me/cashew/address/${walletAddress}`});
+})
+//추후 DB에 TX값 저장한 후 리턴
+router.get('/prize_explorer', async function(req,res,next){ 
+    let tx = '18B276DCDE2926C569D67C83E8E266377CACB25CBA8D7E113BC85A91E7A0B40B'
+    res.send({"data":`https://explorer.blockchain.line.me/cashew/transaction/${tx}`});
+})
+
+router.get('/address_explorer', async function(req,res,next){
+    let tx = '38A21661B1DFBDD6FC648CBF65F40F70638A813A2BF312FE4708A29EC72A90C5'
+    res.send({"data":`https://explorer.blockchain.line.me/cashew/transaction/${tx}`});
+})
+
+router.get('/level_explorer', async function(req,res,next){
+    let tx = 'DC4A7EBA6C15F4D67CEF7429A3E776B7A8604D09220AF964E2CDBAC64190769B'
+    res.send({"data":`https://explorer.blockchain.line.me/cashew/transaction/${tx}`});
+})
 
 /////////////////////////REST API -POST//////////////////////
+
 
 router.post('/mint/', async function(req,res,next){ //검증인 ID 최초 생성
 
@@ -119,38 +157,79 @@ router.post('/mint/', async function(req,res,next){ //검증인 ID 최초 생성
    res.send({"data":data});
 });
 
+//////////////////////////////관리자 권한들-백엔드(백오피스) 에서만 실행////////////////////////////////////////////////////////
+    async function attach_nft(){
+        let tokenType = '10000002';
+        let tokenIndex = '00000001';
+        let parentTokenId = '1000000100000001';
 
-// router.post('/create_nft/', async function(req,res,next){
-//     let tokenType = 10000001;
-//     let tokenIdNname = 'Team0221';
-//     let info = '신발전문 검증자들로 구성되어 있습니다.';
-//     let toAddress = "tlink1tefs8lma3zwcsxl4qa4gq0r8fqvm30qh8jdem2";
-//     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
-//     // the request body should be added after keys are sorted in the ascending order.
-//     await callAPI_product('POST', path, {
-//         "ownerAddress": ownerWalletAddress,
-//         "ownerSecret": ownerWalletSecret,
-//         "name": tokenIdNname,
-//         "toAddress": toAddress,
-//         "meta" : info 
-//     });
-//     // res.send() //추가!!
-//     // 라인 로그인 API 붙일 때 to user id 사용
-// });
-router.get('/address_explorer', async function(req,res,next){
-    let walletAddress = ownerWalletAddress; 
-    res.send({"data":`https://explorer.blockchain.line.me/cashew/address/${walletAddress}`});
-})
+        path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/parent`;
+        // the request body should be added after keys are sorted in the ascending order.
+        let data = await callAPI('POST', path, {
+            "parentTokenId": parentTokenId,
+            "serviceWalletAddress": ownerWalletAddress,
+            "serviceWalletSecret": ownerWalletSecret,
+            "tokenHolderAddress": ownerWalletAddress
+        })
+    };
 
+    async function mint_nft_prize(){
+        let tokenType = 10000002;
+        let toAddress = ownerWalletAddress;
+        let validator_info = '2020년 12월 고객만족도 1위 검증가';
+        let tokenIdNname = 'BestValidator2020';
+        path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
+        // the request body should be added after keys are sorted in the ascending order.
+        let data = await callAPI('POST', path, {
+            "ownerAddress": ownerWalletAddress,
+            "ownerSecret": ownerWalletSecret,
+            "name": tokenIdNname,
+            "toAddress": toAddress,
+            "meta" : validator_info
+        });
+        console.log(data);
+    }
 
+    async function create_nft(){
+        let tokenType = 10000001;
+        let tokenIdNname = 'Team0221';
+        let info = '신발전문 검증자들로 구성되어 있습니다.';
+        let toAddress = "tlink1tefs8lma3zwcsxl4qa4gq0r8fqvm30qh8jdem2";
+        path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
+        // the request body should be added after keys are sorted in the ascending order.
+        await callAPI('POST', path, {
+            "ownerAddress": ownerWalletAddress,
+            "ownerSecret": ownerWalletSecret,
+            "name": tokenIdNname,
+            "toAddress": toAddress,
+            "meta" : info 
+        });
+    };
+
+    async function update_nft(){
+        let tokenType = '10000001';
+        let tokenIndex = '00000001';
+        path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
+        let newmeta = "gold"
+        await callAPI('PUT',path, {
+            "meta": newmeta,
+            "ownerAddress": ownerWalletAddress,
+            "ownerSecret": ownerWalletSecret
+        })
+    }
+
+ (async function () { 
+    // attach_nft();
+    // mint_nft_prize();
+    // update_nft();
+ })()
 // router.get('/get_transfer/', async function(req,res,next){
 //     let walletAddress = ownerWalletAddress; 
-//     path  = `/v1/wallets/${walletAddress}/service-tokens/${contractId}`
+//     path  = `/v1/wallets/${walletAddress}/transactions`
 //     let raw_data = await callAPI('GET', path);
 //     res.send({"balance" : (raw_data.amount)/(10**raw_data.decimals),"symbol" : raw_data.symbol});
 // } )
 
-
-// GET /v1/wallets/{walletAddress}/transactions
+// msgType=collection/MsgTransferNFT
 
 module.exports = router;
