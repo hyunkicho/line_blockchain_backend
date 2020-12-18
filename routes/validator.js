@@ -141,20 +141,20 @@ router.post('/mint_nft/', async function(req,res,next){ //검증인 ID 최초 �
 //     // 라인 로그인 API 붙일 때 to user id 사용
 // });
 
-(async function () { 
-    let tokenType = 10000001;
-    let validator_info = 'Speciality of : Nike,Adidas,Puma';
-    let tokenIdNname = 'chohyunki';
-    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
-    // the request body should be added after keys are sorted in the ascending order.
-    let data = await callAPI('POST', path, {
-        "ownerAddress": ownerWalletAddress,
-        "ownerSecret": ownerWalletSecret,
-        "name": tokenIdNname,
-        "toAddress": ownerWalletAddress,
-        "meta" : validator_info
-    });
- })()
+// (async function () { 
+//     let tokenType = 10000001;
+//     let validator_info = 'Speciality of : Nike,Adidas,Puma';
+//     let tokenIdNname = 'chohyunki';
+//     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
+//     // the request body should be added after keys are sorted in the ascending order.
+//     let data = await callAPI('POST', path, {
+//         "ownerAddress": ownerWalletAddress,
+//         "ownerSecret": ownerWalletSecret,
+//         "name": tokenIdNname,
+//         "toAddress": ownerWalletAddress,
+//         "meta" : validator_info
+//     });
+//  })()
 
 
 

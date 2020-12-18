@@ -155,7 +155,6 @@ router.post('/transfer_nft2/', async function(req,res,next){
 router.post('/mint_nft/', async function(req,res,next){ //판매자가 최초로 신발 등록했을 때
    let tokenType = 10000001;
    let qualityVerifier = 'Validator : Chohyunki';
-   let contractId = contractId;
    let tokenIdNname = 'Nike-dsfe1';
    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
    // the request body should be added after keys are sorted in the ascending order.
@@ -189,9 +188,9 @@ router.post('/mint_nft/', async function(req,res,next){ //판매자가 최초로
 
 // });
 
-(async function () { 
+// (async function () { 
 
- })()
+//  })()
 
 
 
