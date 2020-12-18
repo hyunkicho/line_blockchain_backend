@@ -139,7 +139,18 @@ router.post('/mint/', async function(req,res,next){ //검증인 ID 최초 생성
 // });
 router.get('/address_explorer', async function(req,res,next){
     let walletAddress = ownerWalletAddress; 
-    res.send(`https://explorer.blockchain.line.me/cashew/address/${walletAddress}`)
+    res.send({"data":`https://explorer.blockchain.line.me/cashew/address/${walletAddress}`});
 })
+
+
+// router.get('/get_transfer/', async function(req,res,next){
+//     let walletAddress = ownerWalletAddress; 
+//     path  = `/v1/wallets/${walletAddress}/service-tokens/${contractId}`
+//     let raw_data = await callAPI('GET', path);
+//     res.send({"balance" : (raw_data.amount)/(10**raw_data.decimals),"symbol" : raw_data.symbol});
+// } )
+
+
+// GET /v1/wallets/{walletAddress}/transactions
 
 module.exports = router;
