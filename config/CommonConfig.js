@@ -20,11 +20,13 @@ CommonConfig.Blockchain={
     ownerWalletSecret_product: process.env.ownerWalletSecret_product,
     ownerWalletAddress_product: process.env.ownerWalletAddress_product,
     contractId_product: process.env.contractId_product,
+    contractId_product_sevicetoken: process.env.contractId_product_sevicetoken,
     apikey_validator: process.env.apikey_validator,
     secret_validator: process.env.secret_validator,
     ownerWalletSecret_validator: process.env.ownerWalletSecret_validator,
     ownerWalletAddress_validator: process.env.ownerWalletAddress_validator,
-    contractId_validator: process.env.contractId_validator
+    contractId_validator: process.env.contractId_validator,
+    contractId_validator_servicetoken: process.env.contractId_validator_servicetoken
 }
 
 module.exports = CommonConfig;

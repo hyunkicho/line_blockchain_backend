@@ -168,6 +168,9 @@ router.post('/mint_nft/', async function(req,res,next){ //판매자가 최초로
    res.send({"data":data});
 });
 
+
+
+
 // router.post('/create_nft/', async function(req,res,next){ //새로운 브랜드 제품 추가할 때
 //     let tokenType = 10000001;
 //     let tokenIdNname = 'Adidas_Series';
@@ -187,9 +190,7 @@ router.post('/mint_nft/', async function(req,res,next){ //판매자가 최초로
 
 // });
 
-// (async function () { 
 
-//  })()
 
 
 

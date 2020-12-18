@@ -90,10 +90,7 @@ router.get('/retreive_validator_nft/', async function(req,res,next){
     let data = raw_data.token[0];
     res.send({"data": data});
 });
-//즉시실행 테스트
-(async function () { 
-    
- })()
+
 
 //  router.get('/list_all_nft/', async function(req,res,next){ //검증자 전체리스트 조회 시
 //     let path= `/v1/item-tokens/${contractId}/non-fungibles`

@@ -20,6 +20,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var validatorRouter = require('./routes/validator');
 var productRouter = require('./routes/product');
+var validator_tokenRouter = require('./routes/validator_token');
+
 const cors = require('cors');
 
 
@@ -48,7 +50,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/validator', validatorRouter);
 app.use('/product', productRouter);
-
+app.use('/validator_token', validator_tokenRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
