@@ -35,7 +35,7 @@ NFT - 보증서 관리 부분입니다.
 ![image](https://user-images.githubusercontent.com/35443121/101473444-2e9ac900-398d-11eb-98f6-544e74bccbb2.png)
 
 # 2020 12 18~19
-해커톤 진행
+1차 해커톤 진행 예선 70명 이상의 팀중 20팀 선발, 동일 주제 10팀
 
 실제 구현
 
