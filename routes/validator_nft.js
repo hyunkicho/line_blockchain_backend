@@ -217,19 +217,44 @@ router.post('/mint/', async function(req,res,next){ //검증인 ID 최초 생성
             "ownerSecret": ownerWalletSecret
         })
     }
+    
+    (async function () { 
+       // attach_nft();
+       // mint_nft_prize();
+       // update_nft();
+       let walletAddress = ownerWalletAddress; 
+       path  = `/v1/wallets/${walletAddress}/transactions`
+       let raw_data = await callAPI('GET', path, {
+           "msgType" : "collection/MsgTransferNFT"
+       });
+       let result_data_tx = [];
+       let result_data_timestamp = [];
+       for(i=0;i<raw_data.length;i++){
+           let timestamp = raw_data[i].timestamp;
+           let txhash = raw_data[i].txhash;
+           
+           let blockLink = `https://explorer.blockchain.line.me/cashew/transaction/${txhash}`
+           result_data_tx.push(blockLink);
+           result_data_timestamp.push(timestamp);
+       }
+       console.log(result_data_tx,result_data_timestamp)
 
- (async function () { 
-    // attach_nft();
-    // mint_nft_prize();
-    // update_nft();
- })()
-// router.get('/get_transfer/', async function(req,res,next){
-//     let walletAddress = ownerWalletAddress; 
-//     path  = `/v1/wallets/${walletAddress}/transactions`
-//     let raw_data = await callAPI('GET', path);
-//     res.send({"balance" : (raw_data.amount)/(10**raw_data.decimals),"symbol" : raw_data.symbol});
-// } )
-
-// msgType=collection/MsgTransferNFT
-
+    })()
+    router.get('/get_transfer/', async function(req,res,next){
+        let walletAddress = ownerWalletAddress; 
+        path  = `/v1/wallets/${walletAddress}/transactions`
+        let raw_data = await callAPI('GET', path, {
+            "msgType" : "collection/MsgTransferNFT"
+        });
+        let result_data_tx = [];
+        let result_data_height = [];
+        for(i=0;i<raw_data.length;i++){
+            let height = raw_data[i].height;
+            let txhash = raw_data[i].txhash;
+            result_data_tx.push(txhash);
+            result_data_height.push(height);
+        }
+        res.send({result_data_tx,result_data_height})
+    } )
+    
 module.exports = router;
