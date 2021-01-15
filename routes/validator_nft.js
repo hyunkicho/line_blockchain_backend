@@ -247,14 +247,16 @@ router.post('/mint/', async function(req,res,next){ //검증인 ID 최초 생성
             "msgType" : "collection/MsgTransferNFT"
         });
         let result_data_tx = [];
-        let result_data_height = [];
+        let result_data_timestamp = [];
         for(i=0;i<raw_data.length;i++){
-            let height = raw_data[i].height;
+            let timestamp = raw_data[i].timestamp;
             let txhash = raw_data[i].txhash;
-            result_data_tx.push(txhash);
-            result_data_height.push(height);
+            
+            let blockLink = `https://explorer.blockchain.line.me/cashew/transaction/${txhash}`
+            result_data_tx.push(blockLink);
+            result_data_timestamp.push(timestamp);
         }
-        res.send({result_data_tx,result_data_height})
+        res.send({result_data_tx,result_data_timestamp})
     } )
     
 module.exports = router;
