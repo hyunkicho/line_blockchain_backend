@@ -87,13 +87,12 @@ router.get('/retreive/', async function(req,res,next){
     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}`;
     // the request body should be added after keys are sorted in the ascending order.
     let raw_data = await callAPI('GET', path);
+    console.log(raw_data)
     let data = raw_data.token[0];
     res.send({"data": data});
 });
 
-(async function () { 
 
- })()
 
 // router.get('/list_all_nft/', async function(req,res,next){ //전체 보증서/상품 검색
 //     // let rb = req.body;
@@ -124,8 +123,8 @@ router.get('/retreive/', async function(req,res,next){
 
 router.post('/mint/', async function(req,res,next){ //판매자가 최초로 신발 등록했을 때
    let rb = req.body;
-   let tokenType = 10000001;
-   let price = rb.price;
+   let tokenType = "10000001";
+   let price = 3000;
    let validator = "Cho hyun ki";
    let qualityVerifier = `Price : ${price} , Validator : ${validator}`;
    let tokenIdNname = 'Nike-dsfe1';
@@ -143,38 +142,66 @@ router.post('/mint/', async function(req,res,next){ //판매자가 최초로 신
 });
 
 
-// router.post('/transfer/', async function(req,res,next){
-//     let walletAddress = "tlink14d9ycnwqa975d4fmpfw35u6cnp89redkfm7rpp"; //tokenholder01 
-//     let walletSecret = 'WbQxvP81vdbTanATMH6cpc/ZHGN/FCkHY60AHFUBpRo='; //tokenholder01
-//     let tokenIndex = "00000018";
-//     let tokenType = "10000001";
-//     let toAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz"; //linewallet
-//     path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
-//     // the request body should be added after keys are sorted in the ascending order.
-//     let txid = await callAPI('POST', path, {
-//         "walletSecret": walletSecret,
-//         "toAddress": toAddress,
-//         "memo" : "가격",
-//     });
-//    console.log(txid)
-//     res.send({"txid":txid});
-// });
+router.post('/transfer/', async function(req,res,next){ //추후 DB를 통해 제품별 가격변동 내역과 증거물인 txid를 저장
+    // let walletAddress = "tlink14d9ycnwqa975d4fmpfw35u6cnp89redkfm7rpp"; //tokenholder01 
+    // let walletSecret = 'WbQxvP81vdbTanATMH6cpc/ZHGN/FCkHY60AHFUBpRo='; //tokenholder01
+    let walletAddress = ownerWalletAddress;  
+    let walletSecret = ownerWalletSecret; 
+    let tokenIndex = "000000b1";
+    let tokenType = "10000001";
+    let toAddress = "tlink14d9ycnwqa975d4fmpfw35u6cnp89redkfm7rpp"; 
+    path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
+    // the request body should be added after keys are sorted in the ascending order.
+    let txid = await callAPI('POST', path, {
+        "walletSecret": walletSecret,
+        "toAddress": toAddress
+    });
+    
+    let price = 3000;
+    let validator = "Lee Sang Goo"
+    let qualityVerifier = `Price : ${price} , Validator : ${validator}, txhash: ${txid.txHash}`;
+    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
+    let txid2 = await callAPI('PUT', path, {
+        "meta" : qualityVerifier, 
+        "ownerAddress": ownerWalletAddress,
+        "ownerSecret": ownerWalletSecret
+    });
+    
 
-// router.post('/transfer2/', async function(req,res,next){
-//     let walletAddress = "tlink1l8ka6przt5wpkavxdm5vgjgns6gw0ad7ymsazz";//linewallet
-//     let walletSecret = 'EzB5TnWhisTWEX7yTHs+CX+A/ryq07A13J/9FkwmOQI=';//linewallet
-//     let tokenIndex = "00000018";
-//     let tokenType = "10000001";
-//     let toAddress = "tlink1ka77g4jt5eery5m8fyz85rs4ys4rl783euec64";//test user 1 
-//     path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
-//     // the request body should be added after keys are sorted in the ascending order.
-//     let txid = await callAPI('POST', path, {
-//         "walletSecret": walletSecret,
-//         "toAddress": toAddress
-//     });
-//     console.log(txid)
-//     res.send({"txid":txid}); //test용으로 다시 돌려받기
-// });
+    res.send({"txid":txid});
+});
+
+
+(async function () { 
+   
+})()
+
+
+router.post('/transfer2/', async function(req,res,next){
+    let walletAddress = "tlink14d9ycnwqa975d4fmpfw35u6cnp89redkfm7rpp";//tokenholder01
+    let walletSecret = 'WbQxvP81vdbTanATMH6cpc/ZHGN/FCkHY60AHFUBpRo=';//tokenholder01
+    let tokenIndex = "000000b1";
+    let tokenType = "10000001";
+    let toAddress = ownerWalletAddress;
+    path = `/v1/wallets/${walletAddress}/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}/transfer`;
+    // the request body should be added after keys are sorted in the ascending order.
+    let txid = await callAPI('POST', path, {
+        "walletSecret": walletSecret,
+        "toAddress": toAddress
+    });
+
+    let price = 2400;
+    let validator = "Silver Ash"
+    let qualityVerifier = `Price : ${price} , Validator : ${validator}, txhash: ${txid.txHash}`;
+    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
+    let txid2 = await callAPI('PUT', path, {
+        "meta" : qualityVerifier, 
+        "ownerAddress": ownerWalletAddress,
+        "ownerSecret": ownerWalletSecret
+    });
+
+    res.send({"txid":txid}); //test용으로 다시 돌려받기
+});
 
 // router.post('/create_nft/', async function(req,res,next){ //새로운 브랜드 제품 추가할 때
 //     let tokenType = 10000001;
