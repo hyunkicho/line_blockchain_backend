@@ -158,7 +158,7 @@ router.post('/transfer/', async function(req,res,next){ //추후 DB를 통해 �
     });
     
     let price = 3000;
-    let validator = "Lee Sang Goo"
+    let validator = "박성웅"
     let qualityVerifier = `Price : ${price} , Validator : ${validator}, txhash: ${txid.txHash}`;
     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
     let txid2 = await callAPI('PUT', path, {
@@ -191,7 +191,7 @@ router.post('/transfer2/', async function(req,res,next){
     });
 
     let price = 2400;
-    let validator = "Silver Ash"
+    let validator = "박성웅"
     let qualityVerifier = `Price : ${price} , Validator : ${validator}, txhash: ${txid.txHash}`;
     path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/${tokenIndex}`;
     let txid2 = await callAPI('PUT', path, {

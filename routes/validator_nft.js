@@ -285,5 +285,25 @@ router.post('/mint_user/', async function(req,res,next){ //검증인 ID 최초 �
         }
         res.send({result_data_tx,result_data_timestamp})
     } )
+
+    router.get('/get_transfer2/', async function(req,res,next){
+        let walletAddress = ownerWalletAddress; 
+        path  = `/v1/wallets/${walletAddress}/transactions`
+        let raw_data = await callAPI('GET', path, {
+            "msgType" : "collection/MsgModify"
+        });
+        let result_data_tx = [];
+        let result_data_timestamp = [];
+        for(i=0;i<raw_data.length;i++){
+            let timestamp = raw_data[i].timestamp;
+            let txhash = raw_data[i].txhash;
+            
+            let blockLink = `https://explorer.blockchain.line.me/cashew/transaction/${txhash}`
+            result_data_tx.push(blockLink);
+            result_data_timestamp.push(timestamp);
+        }
+        res.send({result_data_tx,result_data_timestamp})
+    } )
+    
     
 module.exports = router;
