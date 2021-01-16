@@ -124,7 +124,7 @@ router.get('/retreive/', async function(req,res,next){
 router.post('/mint/', async function(req,res,next){ //판매자가 최초로 신발 등록했을 때
    let rb = req.body;
    let tokenType = "10000001";
-   let price = 3000;
+   let price = rb.price;
    let validator = "Cho hyun ki";
    let qualityVerifier = `Price : ${price} , Validator : ${validator}`;
    let tokenIdNname = 'Nike-dsfe1';

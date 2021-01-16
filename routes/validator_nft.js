@@ -183,8 +183,8 @@ router.post('/mint_user/', async function(req,res,next){ //검증인 ID 최초 �
     async function mint_nft_certificate(){
         let tokenType = "10000007";
         let toAddress = ownerWalletAddress;
-        let validator_info = 'shoes-pants-top';
-        let tokenIdNname = 'Certificate:NIKE';
+        let validator_info = 'NIKE/shoes-pants-top/20210110\nAdidas/sneakers/20201221\nCHANEL/bag/20200721\nOmega/watch/20200122\nAdidas/top,pants/20191221';
+        let tokenIdNname = 'Certificate: 박성웅';
         path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
         // the request body should be added after keys are sorted in the ascending order.
         let data = await callAPI('POST', path, {
@@ -261,7 +261,7 @@ router.post('/mint_user/', async function(req,res,next){ //검증인 ID 최초 �
     
     (async function () { 
         // create_nft();
-        // mint_nft_certificate();
+        mint_nft_certificate();
         // mint_nft_validator();
         // mint_nft_user();
         // attach_nft();
