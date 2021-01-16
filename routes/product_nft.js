@@ -92,19 +92,7 @@ router.get('/retreive/', async function(req,res,next){
 });
 
 (async function () { 
-    // let tokenType = 10000001;
-    // let qualityVerifier = 'Validator : Chohyunki';
-    // let tokenIdNname = 'Nike-dsfe1';
-    // path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
-    // // the request body should be added after keys are sorted in the ascending order.
-    // let data = await callAPI('POST', path, {
-    //     "ownerAddress": ownerWalletAddress,
-    //     "ownerSecret": ownerWalletSecret,
-    //     "name": tokenIdNname,
-    //     "toAddress": ownerWalletAddress,
-    //     // "toUserId" : toUserId, //라인 로그인 연동시 사용 가능
-    //     "meta" : qualityVerifier
-    // });
+
  })()
 
 // router.get('/list_all_nft/', async function(req,res,next){ //전체 보증서/상품 검색
@@ -135,8 +123,11 @@ router.get('/retreive/', async function(req,res,next){
 /////////////////////////REST API -POST//////////////////////
 
 router.post('/mint/', async function(req,res,next){ //판매자가 최초로 신발 등록했을 때
+   let rb = req.body;
    let tokenType = 10000001;
-   let qualityVerifier = 'Validator : Chohyunki';
+   let price = rb.price;
+   let validator = "Cho hyun ki";
+   let qualityVerifier = `Price : ${price} , Validator : ${validator}`;
    let tokenIdNname = 'Nike-dsfe1';
    path = `/v1/item-tokens/${contractId}/non-fungibles/${tokenType}/mint`;
    // the request body should be added after keys are sorted in the ascending order.
@@ -148,7 +139,7 @@ router.post('/mint/', async function(req,res,next){ //판매자가 최초로 신
        // "toUserId" : toUserId, //라인 로그인 연동시 사용 가능
        "meta" : qualityVerifier
    });
-   res.send({"data":data});
+   res.send({"data":data , "price": price , "validator" :validator });
 });
 
 
@@ -162,7 +153,8 @@ router.post('/mint/', async function(req,res,next){ //판매자가 최초로 신
 //     // the request body should be added after keys are sorted in the ascending order.
 //     let txid = await callAPI('POST', path, {
 //         "walletSecret": walletSecret,
-//         "toAddress": toAddress
+//         "toAddress": toAddress,
+//         "memo" : "가격",
 //     });
 //    console.log(txid)
 //     res.send({"txid":txid});
