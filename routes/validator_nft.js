@@ -261,7 +261,7 @@ router.post('/mint_user/', async function(req,res,next){ //검증인 ID 최초 �
     
     (async function () { 
         // create_nft();
-        mint_nft_certificate();
+        // mint_nft_certificate();
         // mint_nft_validator();
         // mint_nft_user();
         // attach_nft();
